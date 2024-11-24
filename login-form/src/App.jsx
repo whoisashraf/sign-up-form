@@ -3,6 +3,7 @@ import validator from "validator";
 
 const App = () => {
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -11,15 +12,16 @@ const App = () => {
   const isPasswordMatch = password === confirmPassword;
   const isValidEmail = validator.isEmail(email);
   const isValidPassword = validator.isAlphanumeric(password);
-  const isValidLength = [name, email, username, password].every(
+  const isValidLength = [name, surname, email, username, password].every(
     (field) => field.length >= 5,
   );
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPassword && isValidEmail && isPasswordMatch === true) {
-      console.log(name, email, username, password, confirmPassword);
+      console.log(name, surname, email, username, password, confirmPassword);
       alert("Successfully created user! ");
       setName("");
+      setSurname("");
       setEmail("");
       setUsername("");
       setPassword("");
@@ -37,19 +39,36 @@ const App = () => {
               <form onSubmit={handleSubmit}>
                 <h2 className="is-size-2 mb-2 has-text-centered">Sign Up</h2>
 
-                <div className="field">
-                  <label className="label">Full Name</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="John Doe"
-                      required
-                      value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
-                    />
+                <div className="field is-horizontal">
+                  <div className="field">
+                    <label className="label">Full Name</label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="John Doe"
+                        required
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label className="label">Full Name</label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="John Doe"
+                        required
+                        value={surname}
+                        onChange={(e) => {
+                          setSurname(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
 
