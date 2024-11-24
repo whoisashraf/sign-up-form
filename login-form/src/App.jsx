@@ -107,7 +107,6 @@ const App = () => {
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
-                      console.log(e.target.value);
                       
                       }}
                     />
