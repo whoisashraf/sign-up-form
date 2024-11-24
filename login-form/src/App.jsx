@@ -11,7 +11,11 @@ const App = () => {
 
   const isPasswordMatch = password === confirmPassword;
   const isValidEmail = validator.isEmail(email);
-  const isValidPassword = validator.isAlphanumeric(password) && (password.trim().length >= 8);
+  const isValidPassword = validator.isStrongPassword(password, {
+    minLength: 8,
+    minNumbers: 1,
+    minSymbols: 1,
+  });
   const isValidLength = [name, surname, email, username, password].every(
     (field) => field.length >= 5,
   );
@@ -103,11 +107,13 @@ const App = () => {
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
+                      console.log(e.target.value);
+                      
                       }}
                     />
                     {!isValidPassword && (
                       <p className="help is-danger mb-2">
-                        Password must be more than 8 characters and be alphanumeric!
+                        Password not more than 8 characters or not alphanumeric or missing an uppercase letter!
                       </p>
                     )}
                   </div>
