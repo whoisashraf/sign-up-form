@@ -11,7 +11,7 @@ const App = () => {
 
   const isPasswordMatch = password === confirmPassword;
   const isValidEmail = validator.isEmail(email);
-  const isValidPassword = validator.isAlphanumeric(password);
+  const isValidPassword = validator.isAlphanumeric(password) && (password.trim().length >= 8);
   const isValidLength = [name, surname, email, username, password].every(
     (field) => field.length >= 5,
   );
@@ -39,38 +39,43 @@ const App = () => {
               <form onSubmit={handleSubmit}>
                 <h2 className="is-size-2 mb-2 has-text-centered">Sign Up</h2>
 
-                <div className="field is-horizontal">
-                  <div className="field">
-                    <label className="label">Full Name</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="John Doe"
-                        required
-                        value={name}
-                        onChange={(e) => {
-                          setName(e.target.value);
-                        }}
-                      />
+                <div class="field is-horizontal">
+
+                  <div class="field-body">
+                    <div className="field">
+                      <label className="label">Name</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="John"
+                          required
+                          value={name}
+                          onChange={(e) => {
+                            setName(e.target.value.trim());
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Full Name</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="John Doe"
-                        required
-                        value={surname}
-                        onChange={(e) => {
-                          setSurname(e.target.value);
-                        }}
-                      />
+
+                    <div className="field">
+                      <label className="label">Surame</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="Doe"
+                          required
+                          value={surname}
+                          onChange={(e) => {
+                            setSurname(e.target.value.trim());
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
+
 
                 <div className="field">
                   <label className="label">Username</label>
@@ -82,7 +87,7 @@ const App = () => {
                       required
                       value={username}
                       onChange={(e) => {
-                        setUsername(e.target.value);
+                        setUsername(e.target.value.trim());
                       }}
                     />
                   </div>
@@ -102,7 +107,7 @@ const App = () => {
                     />
                     {!isValidPassword && (
                       <p className="help is-danger mb-2">
-                        Password must contain both numbers and letters!
+                        Password must be more than 8 characters and be alphanumeric!
                       </p>
                     )}
                   </div>
@@ -140,7 +145,7 @@ const App = () => {
                       required
                       value={email}
                       onChange={(e) => {
-                        setEmail(e.target.value);
+                        setEmail(e.target.value.trim());
                       }}
                     />
                     {!isValidEmail && (
